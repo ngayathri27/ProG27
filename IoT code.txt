@@ -1,0 +1,70 @@
+﻿#define BLYNK_TEMPLATE_ID "TMPL3jaELnPav"
+#define BLYNK_TEMPLATE_NAME "sewage"
+#define BLYNK_AUTH_TOKEN "pNS2MzaBhG-kUMRz-pvXGzLTHhDmfPUp"
+ #define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+int sen1=0,sen2=0,sen3=0,sen4=0;
+char ssid[] = "sewage";
+char pass[] = "123456789";
+#include <SimpleDHT.h>
+
+
+ 
+int m,f,e;
+int j=0;
+ int limit;
+unsigned int a=0,b=0,c=0,d=0,a1=0,a2=0,a3=0,a4=0,b1=0,b2=0,b3=0,b4=0,x=0,n=0,n1=0,n2=0;
+int AVALA=0,AVALB=0,AVALC=0,AVALD=0,AVALE=0,AVALE1=0,AVALF=0,AVALG=1,AVALK=0,AVALL=0,count=0;
+
+
+void setup() 
+
+
+{
+  // put your setup code here, to run once:
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass); 
+  //pinMode(HB,INPUT);
+ // pinMode(D6,INPUT);
+ // pinMode(D7,INPUT);
+  pinMode(D3,OUTPUT);
+  pinMode(D8,OUTPUT);
+  pinMode(D5,INPUT);
+ Serial.begin(9600);
+  
+  
+ 
+}
+void loop() 
+{
+   Blynk.run();
+
+
+    if(Serial.available()>0)
+{
+  char red1=Serial.read();delay(100);
+  
+  if(red1=='K')                          //  Level sensor
+{
+  float sen1=Serial.parseFloat();
+   Blynk.virtualWrite(V0,sen1);delay(200);
+} 
+  if(red1=='F')                          // Flow sensor
+{
+  float sen2=Serial.parseFloat();
+    Blynk.virtualWrite(V1,sen2);delay(200);
+}
+if(red1=='R')                          // Flow sensor
+{
+  float sen2=Serial.parseFloat();
+    Blynk.virtualWrite(V2,sen2);delay(200);
+}
+if(red1=='G')                          // Flow sensor
+{
+  float sen2=Serial.parseFloat();
+    Blynk.virtualWrite(V3,sen2);delay(200);
+}
+
+
+}    
+}
